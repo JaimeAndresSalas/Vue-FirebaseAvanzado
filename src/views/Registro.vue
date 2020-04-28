@@ -1,7 +1,7 @@
 <template>
   <div>
     <h1>Registro de Usuarios</h1>
-    <form >
+    <form @submit.prevent="crearUsuario({email:email, pass:pass1})">
       <input type="email" v-model="email">
       <input type="password" v-model="pass1">
       <input type="password" v-model="pass2">
@@ -11,6 +11,8 @@
 </template>
 
 <script>
+import {mapActions} from 'vuex'
+
 export default {
   name:'Registro',
   data(){
@@ -20,6 +22,9 @@ export default {
       pass2:'',
 
     }
+  },
+  methods:{
+    ...mapActions(['crearUsuario'])
   }
 }
 </script>
