@@ -5,16 +5,17 @@
       <input type="email" v-model="email">
       <input type="password" v-model="pass1">
       <input type="password" v-model="pass2">
-      <button type="submit">Crear Usuario</button>
+      <button type="submit" :disabled="!desactivar">Crear Usuario</button>
     </form>
+    <p>{{error}}</p>
   </div>
 </template>
 
 <script>
-import {mapActions} from 'vuex'
+import {mapActions, mapState} from 'vuex'
 
 export default {
-  name:'Registro',
+  name:'registro',
   data(){
     return{
       email:'',
@@ -25,6 +26,12 @@ export default {
   },
   methods:{
     ...mapActions(['crearUsuario'])
+  },
+  computed:{
+    ...mapState(['error']),
+    desactivar(){
+      return this.pass1==this.pass2 && this.pass1 >= 6;
+    }
   }
 }
 </script>
